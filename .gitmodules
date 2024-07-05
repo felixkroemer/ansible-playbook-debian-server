@@ -1,0 +1,3 @@
+[submodule "ansible-collection-vladgh-samba"]
+	path = ansible-collection-vladgh-samba
+	url = https://github.com/vladgh/ansible-collection-vladgh-samba
