@@ -5,6 +5,11 @@
   become_flags: "-"
   roles:
     - ansible-collection-vladgh-samba/roles/server
+    - ansible-role-nfs
+  tasks:
+    - name: Copy ssh authorized_keys from Github
+      shell:
+        cmd: wget -O /home/felix/.ssh/authorized_keys https://github.com/felixkroemer.keys
   vars_files:
     - vault.yml
   vars:
@@ -16,3 +21,4 @@
     samba_users:
         - name: felix
           password: "{{ samba_user_password }}"
+    nfs_exports: [ "/data    *(rw,sync)" ]
