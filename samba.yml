@@ -4,7 +4,6 @@
   become_method: su
   become_flags: "-"
   roles:
-    - ansible-collection-vladgh-samba/roles/server
     - ansible-role-nfs
   tasks:
     - name: Copy ssh authorized_keys from Github
@@ -21,4 +20,3 @@
     samba_users:
         - name: felix
           password: "{{ samba_user_password }}"
-    nfs_exports: [ "/data    *(rw,sync)" ]
