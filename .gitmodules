@@ -1,6 +1,3 @@
-[submodule "ansible-collection-vladgh-samba"]
-	path = ansible-collection-vladgh-samba
-	url = https://github.com/vladgh/ansible-collection-vladgh-samba
 [submodule "ansible-role-nfs"]
 	path = ansible-role-nfs
 	url = https://github.com/geerlingguy/ansible-role-nfs
