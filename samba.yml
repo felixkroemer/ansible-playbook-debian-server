@@ -6,6 +6,13 @@
   roles:
     - ansible-role-nfs
   tasks:
+    - name: Ensure .ssh directory exists
+      file:
+        path: /home/fekr/.ssh
+        state: directory
+        owner: fekr
+        group: fekr
+        mode: '0700'
     - name: Copy ssh authorized_keys from Github
       shell:
         cmd: wget -O /home/fekr/.ssh/authorized_keys https://gist.githubusercontent.com/felixkroemer/c628ea1015e56f7d2f42f0c92c67ec92/raw/e12b9a3eec313a88ebd237b957de8a3001001872/keys
