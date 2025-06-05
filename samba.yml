@@ -19,11 +19,4 @@
   vars_files:
     - vault.yml
   vars:
-    samba_shares:
-      - name: share
-        write_list: felix
-        path: /data
-        group: felix
-    samba_users:
-        - name: felix
-          password: "{{ samba_user_password }}"
+    nfs_exports: [ "/data    *(rw,sync)" ]
