@@ -1,0 +1,58 @@
+- name: Install Java and build tools
+  package:
+    name:
+      - openjdk-17-jdk
+      - git
+      - gradle
+    state: present
+
+- name: Create application directory
+  file:
+    path: "{{ app_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Clone or update repository
+  git:
+    repo: "{{ app_repo_url }}"
+    dest: "{{ app_dir }}/source"
+    version: "{{ app_repo_branch }}"
+    force: yes
+  notify: restart app
+
+- name: Build application with Gradle
+  shell: |
+    cd {{ app_dir }}/source
+    ./gradlew build -x test
+  notify: restart app
+
+- name: Find JAR file
+  find:
+    paths: "{{ app_dir }}/source/build/libs"
+    patterns: "*.jar"
+    excludes: "*-sources.jar,*-javadoc.jar"
+  register: jar_files
+
+- name: Copy JAR to application directory
+  copy:
+    src: "{{ jar_files.files[0].path }}"
+    dest: "{{ app_dir }}/{{ app_name }}.jar"
+    mode: '0755'
+    remote_src: yes
+  notify: restart app
+
+- name: Create systemd service file
+  template:
+    src: drop-catcher.service.j2
+    dest: "/etc/systemd/system/{{ app_name }}.service"
+  notify:
+    - reload systemd
+    - restart app
+
+- name: Enable and start drop-catcher
+  systemd:
+    name: "{{ app_name }}"
+    enabled: yes
+    state: started
+    daemon_reload: yes
+
