@@ -1,5 +1,6 @@
 - name: Install Java and build tools
   package:
+    become: true
     name:
       - openjdk-17-jdk
       - git
