@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User={{ app_user }}
-Group={{ app_user }}
+User=fekr
+Group=fekr
 WorkingDirectory={{ app_dir }}
 ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ app_name }}.jar
 Restart=always
