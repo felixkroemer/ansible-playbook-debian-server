@@ -6,6 +6,7 @@ After=network.target
 Type=simple
 User=fekr
 Group=fekr
+Environment=HOME=/home/fekr
 WorkingDirectory={{ app_dir }}
 ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ app_name }}.jar
 Restart=always
