@@ -1,0 +1,4 @@
+app_name: "drop-catcher"
+app_dir: "/opt/{{ app_name }}"
+app_repo_url: "https://github.com/felixkroemer/drop-catcher"
+app_repo_branch: "main"

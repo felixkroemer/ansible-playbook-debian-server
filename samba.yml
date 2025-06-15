@@ -5,6 +5,7 @@
   become_flags: "-"
   roles:
     - ansible-role-nfs
+    - drop-catcher
   tasks:
     - name: Ensure .ssh directory exists
       file:

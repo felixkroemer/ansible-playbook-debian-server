@@ -1,0 +1,21 @@
+[Unit]
+Description={{ app_name }}
+After=network.target
+
+[Service]
+Type=simple
+User=fekr
+Group=fekr
+Environment=HOME=/home/fekr
+WorkingDirectory={{ app_dir }}
+ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ app_name }}.jar
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier={{ app_name }}
+
+[Install]
+WantedBy=multi-user.target
