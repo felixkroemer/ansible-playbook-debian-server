@@ -1,6 +1,11 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
 - name: Install Java and build tools
+  become: true
   package:
-    become: true
     name:
       - openjdk-17-jdk
       - git
