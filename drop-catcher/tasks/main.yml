@@ -1,16 +1,31 @@
+- name: Load encrypted variables
+  include_vars:
+    file: vault.yaml
+
 - name: Update apt cache
   apt:
     update_cache: yes
   become: true
 
-- name: Install Java and build tools
+- name: Install tools
   become: true
   package:
     name:
-      - openjdk-17-jdk
       - git
       - gradle
     state: present
+
+- name: Download jdk
+  ansible.builtin.get_url:
+    url: https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
+    dest: /tmp/jdk-21_linux-x64_bin.deb
+    mode: '0644'
+
+- name: Install jdk
+  ansible.builtin.apt:
+    deb: /tmp/jdk-21_linux-x64_bin.deb
+    state: present
+  become: true
 
 - name: Create application directory
   file:

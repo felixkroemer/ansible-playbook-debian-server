@@ -7,6 +7,7 @@ Type=simple
 User=fekr
 Group=fekr
 Environment=HOME=/home/fekr
+Environment=OAI_KEY={{ oaiKey | quote }}
 WorkingDirectory={{ app_dir }}
 ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ app_name }}.jar
 Restart=always
