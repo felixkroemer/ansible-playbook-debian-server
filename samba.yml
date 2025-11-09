@@ -7,6 +7,13 @@
     - ansible-role-nfs
     - drop-catcher
   tasks:
+    - name: Ensure data partition is mounted
+      ansible.posix.mount:
+        path: /data
+        src: UUID=cf815afe-91db-4301-9108-2d907a93bec0
+        fstype: ext4
+        opts: defaults
+        state: mounted
     - name: Ensure .ssh directory exists
       file:
         path: /home/fekr/.ssh
