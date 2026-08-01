@@ -4,29 +4,9 @@
   when: duplicity_b2_url == ''
 
 - block:
-    - name: Add bookworm-backports repository
-      apt_repository:
-        repo: "deb http://deb.debian.org/debian bookworm-backports main"
-        state: present
-        update_cache: true
-
-    - name: Prefer duplicity from bookworm-backports
-      copy:
-        dest: /etc/apt/preferences.d/duplicity-backports
-        content: |
-          Package: duplicity
-          Pin: release a=bookworm-backports
-          Pin-Priority: 1001
-        mode: "0644"
-
-    - name: Install duplicity from bookworm-backports
+    - name: Install duplicity
       apt:
         name: duplicity
-        state: present
-
-    - name: Install B2 Python SDK required by duplicity
-      apt:
-        name: python3-b2sdk
         state: present
 
     - name: Check whether /data is empty
