@@ -13,6 +13,12 @@
         fstype: ext4
         opts: defaults
         state: mounted
+    - name: Set ownership on /data mount point
+      file:
+        path: /data
+        owner: fekr
+        group: fekr
+        mode: '0775'
     - import_tasks: tasks/restore.yml
     - name: Ensure .ssh directory exists
       file:
