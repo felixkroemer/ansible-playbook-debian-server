@@ -5,7 +5,6 @@
   become_flags: "-"
   roles:
     - ansible-role-nfs
-    - drop-catcher
   tasks:
     - name: Ensure data partition is mounted
       ansible.posix.mount:
