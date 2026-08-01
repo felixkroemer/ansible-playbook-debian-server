@@ -13,6 +13,7 @@
         fstype: ext4
         opts: defaults
         state: mounted
+    - import_tasks: tasks/restore.yml
     - name: Ensure .ssh directory exists
       file:
         path: /home/fekr/.ssh
@@ -29,3 +30,7 @@
     - vault.yml
   vars:
     nfs_exports: [ "/data    *(rw,sync)" ]
+  vars_prompt:
+    - name: duplicity_b2_url
+      prompt: "B2 backup URL (b2://DUPLICITY_API_KEY_ID:DUPLICITY_API_KEY@BUCKET_NAME)? Leave empty to skip restore"
+      private: no
