@@ -1,1 +1,1 @@
-ansible-playbook --ask-become-pass --ask-vault-pass samba.yml
+ansible-playbook --ask-become-pass --ask-vault-pass main.yml
