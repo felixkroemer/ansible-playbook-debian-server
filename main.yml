@@ -23,24 +23,7 @@
     - name: Copy ssh authorized_keys from Github
       shell:
         cmd: wget -O /home/fekr/.ssh/authorized_keys https://gist.githubusercontent.com/felixkroemer/c628ea1015e56f7d2f42f0c92c67ec92/raw
-    - name: Copy authorized-keys-sync systemd service unit
-      template:
-        src: templates/authorized-keys-sync.service.j2
-        dest: /etc/systemd/system/authorized-keys-sync.service
-        mode: '0644'
-    - name: Copy authorized-keys-sync systemd timer unit
-      template:
-        src: templates/authorized-keys-sync.timer.j2
-        dest: /etc/systemd/system/authorized-keys-sync.timer
-        mode: '0644'
-    - name: Reload systemd daemon for new units
-      systemd:
-        daemon_reload: yes
-    - name: Enable and start authorized-keys-sync timer
-      systemd:
-        name: authorized-keys-sync.timer
-        enabled: yes
-        state: started
+    - import_tasks: tasks/authorized-keys-sync.yml
   vars_files:
     - vault.yml
   vars:
