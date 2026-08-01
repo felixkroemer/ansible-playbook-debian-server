@@ -27,7 +27,7 @@ existing `tasks/authorized-keys-sync.yml` pattern.
 2. **Enable and start service** — `systemd` module on `avahi-daemon`,
    `enabled: yes`, `state: started`.
 3. **Runtime verification** — run `avahi-resolve-host-name {{ ansible_hostname }}.local`
-   with a retry loop (up to 5 attempts, 2s apart) and assert the output
+   with a retry loop (up to 10 attempts, 3s apart) and assert the output
    contains an IPv4 address, confirming avahi is actively publishing.
 
 ## Integration

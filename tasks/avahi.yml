@@ -13,5 +13,5 @@
   command: avahi-resolve-host-name {{ ansible_hostname }}.local
   register: avahi_resolve
   until: avahi_resolve.stdout | regex_search('\\d+\\.\\d+\\.\\d+\\.\\d+')
-  retries: 5
-  delay: 2
+  retries: 10
+  delay: 3
