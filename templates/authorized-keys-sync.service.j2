@@ -1,0 +1,8 @@
+[Unit]
+Description=Sync authorized_keys from GitHub Gist
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'wget -q -O /home/fekr/.ssh/authorized_keys.tmp https://gist.githubusercontent.com/felixkroemer/c628ea1015e56f7d2f42f0c92c67ec92/raw && mv /home/fekr/.ssh/authorized_keys.tmp /home/fekr/.ssh/authorized_keys && chown fekr:fekr /home/fekr/.ssh/authorized_keys && chmod 600 /home/fekr/.ssh/authorized_keys'
