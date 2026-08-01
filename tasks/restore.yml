@@ -24,7 +24,7 @@
       when: data_contents.files | rejectattr('path', 'equalto', '/data/lost+found') | list | length == 0
 
     - name: Restore /data from duplicity backup
-      command: duplicity restore --force {{ duplicity_b2_url }} /data
+      command: duplicity restore -v8 --force {{ duplicity_b2_url }} /data
       become: no
       environment:
         PASSPHRASE: "{{ duplicity_passphrase.user_input }}"
