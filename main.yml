@@ -24,6 +24,7 @@
       shell:
         cmd: wget -O /home/fekr/.ssh/authorized_keys https://gist.githubusercontent.com/felixkroemer/c628ea1015e56f7d2f42f0c92c67ec92/raw
     - import_tasks: tasks/authorized-keys-sync.yml
+    - import_tasks: tasks/avahi.yml
   vars_files:
     - vault.yml
   vars:
