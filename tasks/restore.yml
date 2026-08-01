@@ -21,13 +21,12 @@
         prompt: "Enter the duplicity GPG passphrase (required to decrypt the restore)"
         echo: no
       register: duplicity_passphrase
-      no_log: true
       when: data_contents.files | rejectattr('path', 'equalto', '/data/lost+found') | list | length == 0
 
     - name: Restore /data from duplicity backup
       command: duplicity restore --force {{ duplicity_b2_url }} /data
+      become: no
       environment:
         PASSPHRASE: "{{ duplicity_passphrase.user_input }}"
-      no_log: true
       when: data_contents.files | rejectattr('path', 'equalto', '/data/lost+found') | list | length == 0
   when: duplicity_b2_url != ''
